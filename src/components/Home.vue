@@ -20,6 +20,7 @@
           :collapse="collapseFlag"
           :collapse-transition="false"
           :router="true"
+          :default-active="activePath"
         >
           <!--一级菜单-->
           <!--index用于点击时单独展开-->
@@ -37,7 +38,7 @@
               :index=" '/'+ subitem.path"
               v-for="subitem in item.children"
               :key="subitem.id"
-
+              @click="saveNavState( '/'+ subitem.path)"
             >
               <template slot="title">
                 <i class="el-icon-menu"></i>
@@ -69,25 +70,34 @@
           '102' :'el-icon-shopping-cart-2',
           '145' :'el-icon-document'
         },
-        collapseFlag: false
+        collapseFlag: false,
+        activePath: ''
       }
     },
     created() {
       this.getMenuList();
+      this.activePath = window.sessionStorage.getItem('activePath');
     },
     methods: {
       logout() {
         window.sessionStorage.clear();
         this.$router.push('/login')
       },
+      //获取所有菜单
       async getMenuList() {
         const { data : res } = await this.$http.get('menus');
-        console.log(res);
+        // console.log(res);
         if(res.meta.status != 200) return this.$message.error(res.meta.msg);
         this.menulist = res.data;
       },
+      //切换菜单的折叠
       toggleCollapse() {
-        this.collapseFlag = !this.collapseFlag
+        this.collapseFlag = !this.collapseFlag;
+      },
+      //保存链接的激活状态
+      saveNavState(activePath) {
+        window.sessionStorage.setItem('activePath', activePath);
+        this.activePath = activePath;
       }
     }
   }
