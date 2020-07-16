@@ -195,7 +195,6 @@
         });
         if(res.meta.status != 200) return this.$message.error(res.meta.msg);
         this.cateList = res.data.result;
-        // console.log(res.data.result);
         this.total = res.data.total;
       },
       //页码：更改展示的用户数
