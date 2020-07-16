@@ -26,20 +26,20 @@
           border>
 
           <!--是否有效-->
-          <template v-slot:isok="scope">
-            <i class="el-icon-success" v-if="scope.row.cat_deleted === false" style="color: lightgreen"></i>
+          <template v-slot:isok="slotProps">
+            <i class="el-icon-success" v-if="slotProps.row.cat_deleted === false" style="color: lightgreen"></i>
             <i class="el-icon-error" v-else style="color: red"></i>
           </template>
 
-          <template v-slot:order="scope">
-            <el-tag size="mini" v-if="scope.row.cat_level === 0">一级</el-tag>
-            <el-tag size="mini" type="success" v-else-if="scope.row.cat_level === 1">二级</el-tag>
+          <template v-slot:order="slotProps">
+            <el-tag size="mini" v-if="slotProps.row.cat_level === 0">一级</el-tag>
+            <el-tag size="mini" type="success" v-else-if="slotProps.row.cat_level === 1">二级</el-tag>
             <el-tag size="mini" type="warning" v-else>三级</el-tag>
           </template>
 
-          <template v-slot:opt="scope">
-            <el-button type="primary" icon="el-icon-edit" size="mini"  @click="showEditCateDialog(scope.row.cat_id)">编辑</el-button>
-            <el-button type="danger" icon="el-icon-delete" size="mini"  @click="removeCate(scope.row.cat_id)">删除</el-button>
+          <template v-slot:opt="slotProps">
+            <el-button type="primary" icon="el-icon-edit" size="mini"  @click="showEditCateDialog(slotProps.row.cat_id)">编辑</el-button>
+            <el-button type="danger" icon="el-icon-delete" size="mini"  @click="removeCate(slotProps.row.cat_id)">删除</el-button>
           </template>
 
       </tree-table>

@@ -1,12 +1,18 @@
 <template>
   <div>
-    welcome
+    <drag-control-div></drag-control-div>
   </div>
 </template>
 
+
+
 <script>
+  import DragControlDiv from './base/BaseDragControlDiv.vue'
   export default {
-    name: 'Welcome'
+    name: 'Welcome',
+    components:{
+      DragControlDiv
+    }
   }
 </script>
 
